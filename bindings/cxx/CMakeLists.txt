@@ -16,9 +16,15 @@ target_compile_options(gpiodcxx
         -Wall -Wextra
         -fvisibility=hidden)
 
-target_compile_features(gpiodcxx
-    PUBLIC
-        cxx_std_11)
+if(${CMAKE_VERSION} VERSION_LESS 3.8)
+    target_compile_features(gpiodcxx
+        PUBLIC
+            cxx_range_for)
+else()
+    target_compile_features(gpiodcxx
+        PUBLIC
+            cxx_std_11)
+endif()
 
 set_target_properties(gpiodcxx
     PROPERTIES
